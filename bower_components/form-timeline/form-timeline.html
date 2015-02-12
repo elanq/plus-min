@@ -1,0 +1,122 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../element-timeline/element-timeline.html">
+<link rel="import" href="../model-transaction/model-transaction.html">
+
+<polymer-element name="form-timeline">
+<template>
+      <style>
+          .ok-button{
+            background-color: #2ecc71;
+            color : #ecf0f1;
+          }
+          .cancel-button{
+            background-color: #e74c3c;
+            color : #ecf0f1;
+          }
+          .cd-timeline-img ::content img {
+            display: block;
+            width: 24px;
+            height: 24px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+
+            margin-left: -12px;
+            margin-top: -12px;
+          }
+      </style>
+      <link rel="stylesheet" href="../element-timeline/element-timeline.css">      
+      <model-transaction id="balance"></model-transaction>
+      <template id="summaries" auto repeat="{{sum, sumIndex in summaryTemp}}">
+          <element-timeline transId="{{sum.id}}" arrayIndex="{{sumIndex}}">
+            <div class="cd-timeline-img {{{'cd-plus': sum.plus, 'cd-minus': sum.plus==false} | tokenList}}" >
+              <img/>
+            </div>           
+            <p>{{sum.description}}</p>
+            <span>{{sum.amount}}</span>
+            <h2>{{sum.date}}</h2>
+        </element-timeline>
+      </template>
+        <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-plus">                
+              <content select="img"></content>
+            </div> <!-- cd-timeline-img -->
+            <div class="cd-timeline-content" layout>
+                <content select="h2"></content>
+                    <paper-input-decorator flex label="Description" >
+                        <input is="core-input" id="description">
+                    </paper-input-decorator>
+                    <paper-input-decorator flex label="Amount Value" i>
+                        <input is="core-input" type="number" id="amount">
+                    </paper-input-decorator>
+                    <paper-button id="okButton"  on-click="{{okClicked}}" class="ok-button">OK</paper-button>
+                    <paper-button id="cancelButton" on-click="{{cancelClicked}}" class="cancel-button">CANCEL</paper-button>               
+            </div> <!-- cd-timeline-content -->
+        </div>
+        </template>
+        <script>
+            var pages = document.querySelector('core-animated-pages');          
+            var db;  
+            var summaryTemp = new Array();          
+            function formatCurrency(num){
+                num = num.toString().replace(/\$|\,/g, '');
+                if (isNaN(num)) 
+                    num = '0';
+                sign = (num == (num = Math.abs(num)));
+                num = Math.floor(num * 100 + 0.50000000001);
+                cents = num % 100;
+                num = Math.floor(num / 100).toString();
+                if (cents < 10) 
+                    cents = '0' + cents;
+                for (i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++){
+                    num = num.substring(0, num.length - (4 * i + 3)) + '.' + num.substring(num.length - (4 * i + 3));
+                }
+                return (((sign) ? '' : '-') + 'Rp ' + num + ',' + cents);
+            }            
+
+            Polymer({  
+              ready : function()               
+              {
+                this.summaryTemp = summaryTemp;
+                var select = TransactionModel.all();
+                select.list(null, function(res)
+                {
+                   res.forEach(function(r)
+                   {                    
+                    this.summaryTemp.push(r);                    
+                   });                   
+                });
+
+              },
+              okClicked : function(event, detail, sender){
+                // thipages.selected = 0;                      
+                var desc = this.$.description.value;
+                var amount = this.$.amount.value;                                
+
+                plus = this.$.balance.transaction.plus;                
+
+                var newTransaction = new TransactionModel();
+                newTransaction.amount = formatCurrency(amount);
+                newTransaction.description = desc;
+                newTransaction.plus = plus;                
+                newTransaction.date = new Date(Date.now()).toLocaleString();
+
+                persistence.add(newTransaction);
+                persistence.flush();                                                      
+                summaryTemp.push(newTransaction);                                
+                
+                this.$.description.value = "";
+                this.$.amount.value = "";
+
+              },
+              cancelClicked : function(event, detail, sender){                
+                pages.selected = 0;
+                this.$.description.value = "";
+                this.$.amount.value = "";
+              }
+
+            });
+        </script>
+</polymer-element>

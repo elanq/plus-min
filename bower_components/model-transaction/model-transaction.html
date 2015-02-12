@@ -1,0 +1,23 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<polymer-element name="model-transaction">
+<script>
+  (function()
+  {
+    var transaction = { date: new Date(Date.now()).toLocaleString(),
+                        description : "Some description",
+                        amount : 0,
+                        plus : false };
+    var summary = new Array();  
+    var plus = false;    
+    Polymer({
+      ready : function()
+      {
+        this.transaction = transaction;
+        this.summary = summary;
+        this.plus = plus;      
+      }
+    });
+  })();      
+</script>
+</polymer-element>

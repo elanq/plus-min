@@ -1,0 +1,66 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../model-transaction/model-transaction.html">
+
+<polymer-element name="plus-min-button">
+    <template>
+    <style>
+        .plus, .minus{
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 50%
+        }
+        .plus{
+                top: 0;
+            background: #2ecc71;
+                    /*padding: 1em;    */
+        }
+        .minus{
+                bottom: 0;
+            background: #e74c3c;
+                    /*padding: 1em;    */
+        }
+        .center
+        {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .action-plusmin{
+            font-size: 10em;
+            text-align: center;
+            color: white;
+            font-weight: 100;
+            
+        }
+    </style>
+    <model-transaction id="balance"></model-transaction>
+    <div id="plus" class="plus" on-click="{{plusAction}}">
+        <div class="center">
+            <h1 class="action-plusmin">+</h1>
+        </div>
+    </div>
+    <div id="minus" class="minus" on-click="{{minusAction}}">
+        <div class="center">
+            <h1 class="action-plusmin">-</h1>
+        </div>
+    </div>
+    </template>
+<script>
+    var pages = document.querySelector('core-animated-pages');    
+    Polymer({         
+      plusAction : function(event, detail, sender)
+      {        
+        pages.selected = 1;
+        this.$.balance.transaction.plus = true;        
+      },
+      minusAction : function(event, detail, sender)
+      {
+        pages.selected = 1;
+        this.$.balance.transaction.plus = false;        
+      }
+    });
+</script>
+</polymer-element>

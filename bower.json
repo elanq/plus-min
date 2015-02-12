@@ -1,0 +1,32 @@
+{
+  "name": "PlusMin",
+  "version": "0.0.1",
+  "authors": [
+    "Elan Qisthi <elanqisthi@gmail.com>"
+  ],
+  "description": "PlusMin is my first project in 7 Week code challenge. This app has purpose to create our daily income and expenditure.",
+  "keywords": [
+    "PlusMin",
+    "Polymer",
+    "Phonegap"
+  ],
+  "license": "MIT",
+  "homepage": "http://qisthi.me",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.4",
+    "core-ajax": "Polymer/core-ajax#~0.5.4",
+    "core-animated-pages": "Polymer/core-animated-pages#~0.5.4",
+    "core-header-panel": "Polymer/core-header-panel#~0.5.4",
+    "app-router": "~2.4.0",
+    "paper-fab": "Polymer/paper-fab#~0.5.4",
+    "persistence": "~0.3.0",
+    "paper-icon-button": "Polymer/paper-icon-button#~0.5.4"
+  }
+}
