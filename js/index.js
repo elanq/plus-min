@@ -29,27 +29,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);               
-         Polymer('element-timeline',
-         {
-            trashClicked : function()
-            {
-                var elementId = this.transId;
-                var arrayIndex = this.arrayIndex;
-                // var listTemplate = document.querySelector('form-timeline').shadowRoot.querySelector('#summaries');
-                var formArray = document.querySelector('form-timeline').summaryTemp;
-                // console.log(elementId);
-                // console.log(arrayIndex);
-                // console.log(formArray);
-                TransactionModel.findBy(persistence, 'id',elementId,function(res)
-                {
-                  persistence.remove(res);
-                  formArray.splice(arrayIndex, 1);
-                  persistence.flush()
-
-                  ;
-                });                
-              }
-        });
+         
     },
     // deviceready Event Handler
     //

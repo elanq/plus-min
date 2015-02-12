@@ -29,6 +29,21 @@
      <!-- cd-timeline-block -->
   </template>
   <script>
-    
+    Polymer(
+         {
+            trashClicked : function()
+            {
+                var elementId = this.transId;
+                var arrayIndex = this.arrayIndex;                
+                var formArray = document.querySelector('form-timeline').summaryTemp;                
+                
+                TransactionModel.findBy(persistence, 'id',elementId,function(res)
+                {
+                  persistence.remove(res);
+                  formArray.splice(arrayIndex, 1);
+                  persistence.flush();
+                });                
+              }
+            });
   </script>
 </polymer-element>
