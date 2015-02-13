@@ -30,7 +30,7 @@
       <link rel="stylesheet" href="../element-timeline/element-timeline.css">      
       <model-transaction id="balance"></model-transaction>
       <template id="summaries" auto repeat="{{sum, sumIndex in summaryTemp}}">
-          <element-timeline transId="{{sum.id}}" arrayIndex="{{sumIndex}}">
+          <element-timeline transId="{{sum.id}}" arrayIndex="{{sumIndex}}" on-created="{{test}}">
             <div class="cd-timeline-img {{{'cd-plus': sum.plus, 'cd-minus': sum.plus==false} | tokenList}}" >
               <img/>
             </div>           
@@ -46,7 +46,7 @@
             <div class="cd-timeline-content" layout>
                 <content select="h2"></content>
                     <paper-input-decorator flex label="Description" >
-                        <input is="core-input" id="description">
+                        <input is="core-input" id="description" floatinglabel>
                     </paper-input-decorator>
                     <paper-input-decorator flex label="Amount Value" i>
                         <input is="core-input" type="number" id="amount">

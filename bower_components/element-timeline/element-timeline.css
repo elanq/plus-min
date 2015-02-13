@@ -355,3 +355,6 @@
           transform: translateX(0);
         }
       }
+.hide{
+  visibility: hidden;
+}

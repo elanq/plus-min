@@ -48,13 +48,11 @@ var app = {
 
         // listeningElement.setAttribute('style', 'display:none;');
         // receivedElement.setAttribute('style', 'display:block;');
-
         console.log('Received Event: ' + id);
         
     },
     initDb : function()
-    {        
-        console.log("Executing Db");
+    {                
         if(window.openDatabase)
         {
             persistence.store.websql.config(persistence, "plusmin", 'database', 5 * 1024 * 1024);

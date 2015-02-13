@@ -13,7 +13,7 @@
         display: inline-block;
       }
     </style>
-      <div class="cd-timeline-block">
+      <div class="cd-timeline-block" id="block-{{arrayIndex}}" class= "hide">
         <content select="div"></content>
         <!-- <div class="cd-timeline-img cd-picture">
           <content select="img"></content>        
@@ -31,6 +31,20 @@
   <script>
     Polymer(
          {
+          // domReady : function()
+          // {                
+          //   var elementId = this.arrayIndex;
+          //   var divElement = document.querySelector('form-timeline /deep/ element-timeline /deep/ div#block-'+elementId+' .cd-timeline-content');
+          //   // console.log(divElement);
+          //   // console.log(elementId);
+          //   divElement.classList.add("bounce-in");
+          // },
+          // detached: function()
+          // {
+          //   var elementId = this.arrayIndex;
+          //   var divElement = document.querySelector('form-timeline ::shadow element-timeline');
+          //   console.log(divElement);
+          // },
             trashClicked : function()
             {
                 var elementId = this.transId;
@@ -43,7 +57,7 @@
                   formArray.splice(arrayIndex, 1);
                   persistence.flush();
                 });                
-              }
+              }            
             });
   </script>
 </polymer-element>

@@ -64,14 +64,14 @@ header h1 {
   font-size: 1.125rem;
 }
 @media only screen and (min-width: 1170px) {
-  header {
+  /*header {
     height: 300px;
     line-height: 300px;
   }
   header h1 {
     font-size: 24px;
     font-size: 1.5rem;
-  }
+  }*/
 }
 
 #cd-timeline {
@@ -92,13 +92,13 @@ header h1 {
   background: #d7e4ed;
 }
 @media only screen and (min-width: 1170px) {
-  #cd-timeline {
+  /*#cd-timeline {
     margin-top: 3em;
     margin-bottom: 3em;
   }
   #cd-timeline::before {
     left: 50%;
     margin-left: -2px;
-  }
+  }*/
 }
 

@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
 <link rel="import" href="../model-transaction/model-transaction.html">
 
 <polymer-element name="plus-min-button">
@@ -38,11 +39,14 @@
     </style>
     <model-transaction id="balance"></model-transaction>
     <div id="plus" class="plus" on-click="{{plusAction}}">
+        <paper-ripple fit></paper-ripple>
         <div class="center">
             <h1 class="action-plusmin">+</h1>
+
         </div>
     </div>
     <div id="minus" class="minus" on-click="{{minusAction}}">
+        <paper-ripple fit></paper-ripple>
         <div class="center">
             <h1 class="action-plusmin">-</h1>
         </div>
