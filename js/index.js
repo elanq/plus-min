@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var incomeSum = new Number();
+var outcomeSum = new Number();
 var transactionModel;
 var app = {
     // Application Constructor

@@ -50,9 +50,28 @@
                 var elementId = this.transId;
                 var arrayIndex = this.arrayIndex;                
                 var formArray = document.querySelector('form-timeline').summaryTemp;                
-                
+                var income = document.querySelector('form-timeline').incomeSum;
+                var outcome = document.querySelector('form-timeline').outcomeSum;
+                // var balance = document.querySelector('form-timeline').balanceTemp;
                 TransactionModel.findBy(persistence, 'id',elementId,function(res)
                 {
+                  // console.log(income);
+                  //console.log(outcome);
+                  if(res.plus)
+                  {
+                    var temp = Number(accounting.unformat(income)) - Number(accounting.unformat(res.amount));
+                    document.querySelector('form-timeline').incomeSum = "Rp "+accounting.format(temp);
+                    incomeSum = incomeSum - Number(accounting.unformat(res.amount));
+                    // console.log(income);
+                  }else{
+                    var temp = Number(accounting.unformat(outcome)) - Number(accounting.unformat(res.amount));
+                    document.querySelector('form-timeline').outcomeSum = "Rp "+accounting.format(temp);
+                    outcomeSum = outcomeSum - Number(accounting.unformat(res.amount));
+                    //console.log(outcome);
+                    
+                  } 
+                  document.querySelector('form-timeline').balanceTemp = Number(accounting.unformat(incomeSum)) - Number(accounting.unformat(outcomeSum));                 
+                  
                   persistence.remove(res);
                   formArray.splice(arrayIndex, 1);
                   persistence.flush();
